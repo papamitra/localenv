@@ -1,0 +1,11 @@
+#!/bin/sh
+
+export GOROOT=$HOME/go
+export GOBIN=$HOME/opt/bin
+export GOOS=linux
+export GOARCH=386
+export PATH=$PATH:$GOBIN
+
+export ANDROID_SDK_HOME=$HOME/opt/android
+
+synergys
