@@ -502,3 +502,6 @@ For details of keybindings, do `\\[describe-function] iswitchb'."
 
 ;; F12 で Speedbar
 (global-set-key [f12] 'sr-speedbar-toggle)
+
+;; egg
+(require 'egg)

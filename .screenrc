@@ -50,11 +50,6 @@ bind I login on
 bind O login off
 bind } history
 
-bind 2 split
-bind o focus
-bind 1 only
-bind 0 remove
-
 # always use status line
 hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
 
