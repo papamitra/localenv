@@ -458,6 +458,12 @@ For details of keybindings, do `\\[describe-function] iswitchb'."
 (require 'scala-mode-auto)
 (setq scala-interpreter "~/opt/scala/bin/scala")
 
+(require 'scala-mode)
+(add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
+(add-to-list 'load-path "~/opt/ensime/elisp/")
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
 ; for install-elisp
 (require 'install-elisp)
 (setq install-elisp-repository-directory "~/.emacs.d/site-lisp")
