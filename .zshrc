@@ -2,7 +2,7 @@
 #PRONPT
 PS1="[@${HOST%%.*} %1~]%(!.#.$) "
 
-RPROMPT="%T"                      # 右側に時間を表示する
+#RPROMPT="%T"                      # 右側に時間を表示する
 setopt transient_rprompt          # 右側まで入力がきたら時間を消す
 
 autoload -U compinit
@@ -94,12 +94,12 @@ autoload -U colors; colors
 #ターミナルのタイトル設定
 case "${TERM}" in
 mlterm|kterm*|xterm)
-    precmd(){
+    titlechange(){
         echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
     }
     ;;
 screen*)
-    precmd(){
+    titlechange(){
 	echo -ne "\033P\033]0;${USER}@${HOST%%.*}:${PWD}\007\033\\"
     }
     ;;
@@ -128,6 +128,23 @@ alias ll="ls -l"
 #alias gls="gls --color"
 
 zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34'
+
+# ブランチ名表示
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' formats '(%s)-[%b]'
+zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
+repinfo(){
+    psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
+
+
+precmd () {
+    repinfo
+    titlechange
+}
+RPROMPT="%1(v|%F{green}%1v%f|)"
 
 export ANDROID_SDK_HOME=$HOME/opt/android
 export PATH=$HOME/opt/bin:$HOME/opt/scala/bin:$HOME/opt/android/tools:$PATH
