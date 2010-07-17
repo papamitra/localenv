@@ -5,6 +5,13 @@ PS1="[@${HOST%%.*} %1~]%(!.#.$) "
 RPROMPT="%T"                      # 右側に時間を表示する
 setopt transient_rprompt          # 右側まで入力がきたら時間を消す
 
+autoload -U compinit
+compinit
+
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000
+SAVEHIST=1000000
+
 bindkey -e
 bindkey '^W' kill-region
 # 複数の zsh を同時に使う時など history ファイルに上書きせず追加
@@ -77,11 +84,50 @@ setopt transient_rprompt
 unsetopt promptcr
 # リダイレクトでファイルを消さない
 setopt no_clobber
+# 補完候補をpack
+setopt list_packed
 
 # すごいプロンプト
 setopt prompt_subst
 autoload -U colors; colors
 
+#ターミナルのタイトル設定
+case "${TERM}" in
+mlterm|kterm*|xterm)
+    precmd(){
+        echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
+    }
+    ;;
+screen*)
+    precmd(){
+	echo -ne "\033P\033]0;${USER}@${HOST%%.*}:${PWD}\007\033\\"
+    }
+    ;;
+esac
+
+# 履歴検索設定
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+
+# エイリアスいろいろ
+alias du="du -h"
+alias df="df -h"
+alias su="su -l"
+
+export LSCOLORS=exfxcxdxbxegedabagacad
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+
+alias ls="ls --color"
+alias la="ls -a"
+alias lf="ls -F"
+alias ll="ls -l"
+
+#alias gls="gls --color"
+
+zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34'
+
 export ANDROID_SDK_HOME=$HOME/opt/android
 export PATH=$HOME/opt/bin:$HOME/opt/scala/bin:$HOME/opt/android/tools:$PATH
-
