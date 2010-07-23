@@ -146,5 +146,5 @@ precmd () {
 }
 RPROMPT="%1(v|%F{green}%1v%f|)"
 
-export ANDROID_SDK_HOME=$HOME/opt/android
+export ANDROID_SDK_ROOT=$HOME/opt/android
 export PATH=$HOME/opt/bin:$HOME/opt/scala/bin:$HOME/opt/android/tools:$PATH
