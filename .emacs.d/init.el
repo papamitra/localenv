@@ -511,3 +511,28 @@ For details of keybindings, do `\\[describe-function] iswitchb'."
 
 ;; egg
 (require 'egg)
+
+(require 'gtags) 
+(add-hook 'java-mode-hook (lambda () (gtags-mode 1))) 
+(add-hook 'c-mode-hook (lambda () (gtags-mode 1))) 
+(add-hook 'c++-mode-hook (lambda () (gtags-mode 1))) 
+
+;; elをemacswikiなどからDLしてくる
+(add-to-list 'load-path "~/.emacs.d/site-lisp") 
+(require 'install-elisp) 
+(setq install-elisp-repository-directory "~/.emacs.d/site-lisp")
+
+;; anything
+(require 'anything) 
+(require 'anything-config) 
+(require 'anything-etags) 
+(require 'anything-gtags)
+
+(setq anything-sources 
+      '(anything-c-source-buffers 
+	anything-c-source-imenu 
+	anything-c-source-etags-select 
+	anything-c-source-gtags-select 
+	))
+
+(global-set-key (kbd "C-x b") 'anything)
