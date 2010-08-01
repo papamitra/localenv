@@ -356,6 +356,7 @@ and source-file directory for your debugger." t)
 ;; shift-tabでwindowを移動する
 (global-set-key [backtab] 'other-window)
 
+'( ; コメントアウト
 ;; for go
 (add-to-list 'load-path "~/go/misc/emacs" t)
 (require 'go-mode-load)
@@ -398,6 +399,7 @@ and source-file directory for your debugger." t)
 ;(defslime-exec slime-run-sbcl 'sbcl 'utf-8-unix)
 ;(defslime-exec slime-run-clojure 'clojure 'utf-8-unix)
 ;(add-to-list 'slime-lisp-implementations '(sbcl ("sbcl")))
+) ;; コメントアウトここまで
 
 ;; for iswitch
 (iswitchb-mode 1)
@@ -454,7 +456,7 @@ For details of keybindings, do `\\[describe-function] iswitchb'."
     (select-window (minibuffer-window))))
 
 ; for scala
-(add-to-list 'load-path "/home/insight/opt/scala/misc/scala-tool-support/emacs")
+(add-to-list 'load-path "~/opt/scala/misc/scala-tool-support/emacs")
 (require 'scala-mode-auto)
 (setq scala-interpreter "~/opt/scala/bin/scala")
 
