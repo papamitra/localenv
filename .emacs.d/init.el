@@ -463,8 +463,13 @@ For details of keybindings, do `\\[describe-function] iswitchb'."
 (require 'scala-mode)
 (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
 (add-to-list 'load-path "~/opt/ensime/elisp/")
-(require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+;; ensime エラーは無視
+(condition-case nil
+    (progn
+      (require 'ensime)
+      (add-hook 'scala-mode-hook 'ensime-scala-mode-hook))
+  (error nil))
 
 ; for install-elisp
 (require 'install-elisp)
