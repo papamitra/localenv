@@ -31,14 +31,6 @@
 ; color-mode
 (require 'color-theme)
 
-;(load "navi")
-;(global-set-key [f11] 	   'call-navi)
-;(global-set-key "C-xC-l" 'call-navi)
-;(defun call-navi ()
-;  (interactive)
-;  (navi (buffer-name))
-;)
-
 ;; hook 用の関数の定義
 (defun my-c-mode-common-hook ()
   ;; my-c-stye を有効にする
@@ -543,3 +535,39 @@ For details of keybindings, do `\\[describe-function] iswitchb'."
 	))
 
 (global-set-key (kbd "C-x b") 'anything)
+
+;;; 履歴を次回のEmacs起動時にも保存する
+(savehist-mode 1)
+
+;;; ファイル内のカーソル一を記憶する
+(setq-default save-place t)
+(require 'saveplace)
+
+;;; モードラインに時刻を表示
+(display-time)
+
+;;; 行番号・桁番号を表示する
+(line-number-mode 1)
+(column-number-mode 1)
+
+;;; GCを減らして軽くする
+(setq gc-cons-threshold (* 10 gc-cons-threshold))
+
+;;; ログの記録行数を増やす
+(setq message-log-max 10000)
+
+;;; ミニバッファを再帰的に呼び出せるようにする
+(setq enable-recursive-minibuffers t)
+
+;;; ダイアログボックスを使わないようにする
+(setq use-dialog-box nil)
+(defalias 'message-box 'message)
+
+;;;　履歴をたくさん保存する
+(setq history-length 1000)
+
+;;; キーストロークをエコーエリアに早く表示する
+(setq echo-keystrokes 0.1)
+
+;;; ツールバーを消す
+(tool-bar-mode -1)
