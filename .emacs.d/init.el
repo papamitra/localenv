@@ -201,6 +201,12 @@ and source-file directory for your debugger." t)
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
+(defun my-scala-mode-hook ()
+  (define-key scala-mode-map (kbd "C-c l") 'scala-mode-feature-tags-load)
+  (define-key scala-mode-map (kbd "C-c .") 'find-tag)
+)
+(add-hook 'scala-mode-hook 'my-scala-mode-hook)
+
 ;; auto-install
 (setq install-elisp-repository-directory "~/.emacs.d/site-lisp")
 (setq auto-install-directory "~/.emacs.d/site-lisp")
@@ -218,8 +224,8 @@ and source-file directory for your debugger." t)
 
 
 ; for grep-edit
-(require 'grep-edit)
-(global-set-key [f2] 'lgrep)
+;(require 'grep-edit)
+(global-set-key [f2] 'moccur-grep-find)
 
 ; for speedbar
 (require 'sr-speedbar)
@@ -277,9 +283,10 @@ and source-file directory for your debugger." t)
 (require 'anything-config)
 (require 'anything-etags)
 (require 'anything-gtags)
+(require 'anything-ipa)
 
 (setq anything-sources
-      '(anything-c-source-buffers
+      '(anything-c-source-ipa
 	anything-c-source-imenu
 	anything-c-source-etags-select
 	anything-c-source-gtags-select
@@ -289,7 +296,6 @@ and source-file directory for your debugger." t)
 
 (global-set-key (kbd "M-y") 'anything-show-kill-ring)
 (global-set-key (kbd "C-x b") 'anything-for-files)
-
 
 ;; redo+.el
 (require 'redo+)
@@ -339,3 +345,6 @@ and source-file directory for your debugger." t)
 
 ;;; ツールバーを消す
 (tool-bar-mode -1)
+
+;; ipa
+(require 'ipa)
