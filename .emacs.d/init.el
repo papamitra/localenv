@@ -19,6 +19,10 @@
 (global-set-key [?\C-t] 'elscreen-clone)
 ;(global-set-key [?\C-q] 'elscreen-kill) ; C-q [TAB]を使いたいのでコメントアウト
 
+;; skk
+(set-input-method "japanese-skk")
+(inactivate-input-method)
+
 ;; 対応するカッコをハイライト
 (show-paren-mode)
 
