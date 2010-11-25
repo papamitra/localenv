@@ -149,50 +149,8 @@ and source-file directory for your debugger." t)
 ;; shift-tabでwindowを移動する
 (global-set-key [backtab] 'other-window)
 
-'( ; コメントアウト
-;; for go
-(add-to-list 'load-path "~/go/misc/emacs" t)
-(require 'go-mode-load)
-(add-hook 'go-mode-hook
-          '(lambda()
-             (setq tab-width 2)))
-
-;; clojure-mode
-(add-to-list 'load-path "~/opt/clojure-mode")
-(require 'clojure-mode)
-
-;; swank-clojure
-(add-to-list 'load-path "~/opt/swank-clojure/src/emacs")
-
-(setq swank-clojure-jar-path "~/opt/clojure/clojure.jar"
-      swank-clojure-extra-classpaths (append (list
-					      "~/opt/swank-clojure/src/main/clojure"
-					      "~/.clojure/clojure-contrib.jar"
-					      "~/src/clojure"
-					      "~/src/clojure/classes"
-					      "/usr/share/java")
-					     (directory-files "/usr/share/java" t "\.jar$"))
-      swank-clojure-extra-vm-args (list "-Djava.net.preferIPv4Stack=true"))
-
-(require 'swank-clojure-autoload)
-
-;; slime
-(eval-after-load "slime"
-  '(progn (slime-setup '(slime-repl))))
-
-(add-to-list 'load-path "~/opt/slime")
-(require 'slime)
-(slime-setup)
-
-(defmacro defslime-exec (name lisp coding)
-  `(defun ,name ()
-     (interactive)
-     (slime ,lisp ,coding)))
-
-;(defslime-exec slime-run-sbcl 'sbcl 'utf-8-unix)
-;(defslime-exec slime-run-clojure 'clojure 'utf-8-unix)
-;(add-to-list 'slime-lisp-implementations '(sbcl ("sbcl")))
-) ;; コメントアウトここまで
+;; 現在の行をハイライト
+(global-hl-line-mode t)
 
 ; for scala
 (add-to-list 'load-path "~/opt/scala/misc/scala-tool-support/emacs")
