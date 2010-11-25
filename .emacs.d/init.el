@@ -352,3 +352,16 @@ and source-file directory for your debugger." t)
 
 ;; ipa
 (require 'ipa)
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/twittering-mode")
+
+(require 'twittering-mode)
+
+(setq twittering-status-format
+      "%C{%Y/%m/%d %H:%M:%S} %s > %T // from %f%L%r%R")
+
+(setq twittering-update-status-function 'twittering-update-status-from-pop-up-buffer)
+
+;;; load local file
+(if (file-exists-p "./local.el")
+    (load "load.el"))
