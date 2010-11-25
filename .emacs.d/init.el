@@ -5,7 +5,7 @@
       (append
        (list
        (expand-file-name "~/.emacs.d/")
-       (expand-file-name "~/.emacs.d/site-lisp")
+       (expand-file-name "~/.emacs.d/site-lisp/")
        )
        load-path))
 
@@ -208,8 +208,8 @@ and source-file directory for your debugger." t)
 (add-hook 'scala-mode-hook 'my-scala-mode-hook)
 
 ;; auto-install
-(setq install-elisp-repository-directory "~/.emacs.d/site-lisp")
-(setq auto-install-directory "~/.emacs.d/site-lisp")
+(setq install-elisp-repository-directory "~/.emacs.d/site-lisp/")
+(setq auto-install-directory "~/.emacs.d/site-lisp/")
 
 (require 'auto-install)
 
@@ -279,20 +279,20 @@ and source-file directory for your debugger." t)
 
 ;; anything
 (require 'anything-startup)
-(require 'anything)
-(require 'anything-config)
-(require 'anything-etags)
-(require 'anything-gtags)
-(require 'anything-ipa)
+;(require 'anything)
+;(require 'anything-config)
+;(require 'anything-etags)
+;(require 'anything-gtags)
+;(require 'anything-ipa)
 
-(setq anything-sources
-      '(anything-c-source-ipa
-	anything-c-source-imenu
-	anything-c-source-etags-select
-	anything-c-source-gtags-select
-	))
+;(setq anything-sources
+;      '(anything-c-source-ipa
+;	anything-c-source-imenu
+;	anything-c-source-etags-select
+;	anything-c-source-gtags-select
+;	))
 
-(global-set-key (kbd "C-:") 'anything)
+;(global-set-key (kbd "C-:") 'anything)
 
 (global-set-key (kbd "M-y") 'anything-show-kill-ring)
 (global-set-key (kbd "C-x b") 'anything-for-files)
