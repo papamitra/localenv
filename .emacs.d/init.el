@@ -20,8 +20,8 @@
 ;(global-set-key [?\C-q] 'elscreen-kill) ; C-q [TAB]を使いたいのでコメントアウト
 
 ;; skk
-(set-input-method "japanese-skk")
-(inactivate-input-method)
+;(set-input-method "japanese-skk")
+;(inactivate-input-method)
 
 ;; 対応するカッコをハイライト
 (show-paren-mode)
@@ -130,12 +130,6 @@ and source-file directory for your debugger." t)
 ; for javascript
 ;(autoload 'javascript-mode "javascript" nil t) (setq auto-mode-alist (cons '("\\.js$" . javascript-mode) auto-mode-alist))
 
-(let ((term (getenv "TERM")))
-  (if (not (or (equal term "xterm") (equal term "xterm-color") (equal term "screen") (equal term "linux")))
-      (progn
-	(load "./site-lisp/my-color-theme.el")
-	(my-color-theme))))
-
 ;; C-x bで存在しないバッファを指定して新規バッファを開いたときにはデフォルトでlisp-interaction-modeが起動する。
 (setq default-major-mode 'lisp-interaction-mode)
 
@@ -150,7 +144,7 @@ and source-file directory for your debugger." t)
 (global-set-key [backtab] 'other-window)
 
 ;; 現在の行をハイライト
-(global-hl-line-mode t)
+;(global-hl-line-mode t)
 
 ; for scala
 (add-to-list 'load-path "~/opt/scala/misc/scala-tool-support/emacs")
@@ -303,7 +297,7 @@ and source-file directory for your debugger." t)
 (setq history-length 1000)
 
 ;;; キーストロークをエコーエリアに早く表示する
-(setq echo-keystrokes 0.1)
+;(setq echo-keystrokes 0.1)
 
 ;;; ツールバーを消す
 (tool-bar-mode -1)
@@ -323,3 +317,32 @@ and source-file directory for your debugger." t)
 ;;; load local file
 (if (file-exists-p "./local.el")
     (load "load.el"))
+
+;; for f#
+(setq load-path (cons "~/.emacs.d/site-lisp/fsharp" load-path))
+(setq auto-mode-alist (cons '("\\.fs[iylx]?$" . fsharp-mode) auto-mode-alist))
+(autoload 'fsharp-mode "fsharp" "Major mode for editing F# code." t)
+(autoload 'run-fsharp "inf-fsharp" "Run an inferior F# process." t)
+
+(setq inferior-fsharp-program "fsharpi --gui-")
+(setq fsharp-compiler "fsharpc")
+(put 'set-goal-column 'disabled nil)
+
+;; for mozc
+(load-file "/usr/share/emacs/site-lisp/emacs-mozc/mozc.el")
+(setq default-input-method "japanese-mozc")
+(global-set-key (kbd "C-o") 'toggle-input-method)
+
+(let ((term (getenv "TERM")))
+  (if (not (or (equal term "xterm") (equal term "xterm-color") (equal term "screen") (equal term "linux") (equal term "screen.mlterm")))
+      (progn
+	(load "~/.emacs.d/site-lisp/my-color-theme.el")
+	(my-color-theme))))
+
+;; yasnippet
+(add-to-list 'load-path
+	     "~/.emacs.d/site-lisp/yasnippet")
+(require 'yasnippet) ;; not yasnippet-bundle
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/site-lisp/yasnippet/snippets")
+(yas/load-directory "~/.emacs.d/snippets")
