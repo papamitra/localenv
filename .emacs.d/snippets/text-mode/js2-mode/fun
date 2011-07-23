@@ -1,0 +1,5 @@
+# name: jquery function
+# --
+\$(function (){
+  $1
+});
