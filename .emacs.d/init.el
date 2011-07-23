@@ -344,5 +344,19 @@ and source-file directory for your debugger." t)
 	     "~/.emacs.d/site-lisp/yasnippet")
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/site-lisp/yasnippet/snippets")
 (yas/load-directory "~/.emacs.d/snippets")
+(yas/load-directory "~/.emacs.d/site-lisp/yasnippet/snippets")
+
+;; js2-mode
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+(eval-after-load 'js2-mode
+  '(progn
+     (define-key js2-mode-map (kbd "TAB") (lambda()
+                                            (interactive)
+                                            (let ((yas/fallback-behavior 'return-nil))
+                                              (unless (yas/expand)
+                                                (indent-for-tab-command)
+                                                (if (looking-back "^\s*")
+                                                    (back-to-indentation))))))))
